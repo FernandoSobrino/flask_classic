@@ -1,4 +1,4 @@
-from key import APIKEY
+from criptoapp.key import APIKEY
 import requests
 
 class APIError(Exception):
