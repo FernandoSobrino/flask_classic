@@ -1,0 +1,129 @@
+header {
+    background-color: rgba(102, 209, 3, 0.886);
+    color: #180135;
+    height: 50px;
+    font-size: large;
+    line-height: 50px;
+    padding-left: 25px;
+}
+
+nav {
+    background-color: #3e0188;
+    color: white;
+    height: 25px;
+    font-size: medium;
+    line-height: 25px;
+    padding-left: 25px;
+}
+
+nav.main-menu a {
+    color: white
+}
+
+main {
+    max-width: 800px;
+    margin: auto;
+    padding: 0 20px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    color: #180135;
+}
+
+table.paper {
+    width: 100%;
+    background-color: whitesmoke;
+}
+
+table.paper td {
+    text-align: center;
+}
+
+.titulo_tabla {
+    border-bottom: rgba(102, 209, 3, 0.886) 1px solid;
+}
+
+.numero,
+.acciones {
+    text-align: right;
+}
+
+.mini-boton {
+    border: solid 1px darkgray;
+    background-color: lightgray;
+    border-radius: 3px;
+    padding: 0 2px;
+}
+
+table.paper .error {
+    font-size: small;
+    padding-left: 40px;
+    color: #990000
+}
+
+.pie-de-pagina {
+    margin-top: 40px;
+    padding: 20px;
+    border-top: solid 3px #180135;
+}
+
+.lista-vacia {
+    text-align: center;
+    padding: 20px;
+    color: #666666;
+}
+
+/* Estilos del formulario */
+
+.campo-formulario label {
+    display: block;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0;
+    margin-top: .5rem;
+
+}
+
+.campo-formulario .radio-label,
+.campo-formulario>input[type="radio"]~label {
+    display: inline-block;
+    margin-right: 2rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.campo-formulario input:not([type="radio"]) {
+    width: 100%;
+}
+
+.lista-errores {
+    background-color: rgba(200, 0, 0, .25);
+    color: darkred;
+    border: solid 2px darkred;
+    padding: 2rem;
+    font-size: 1rem;
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+}
+
+.icono-error {
+    margin-right: 1rem;
+    font-size: 32px;
+}
+
+
+.exito-flash {
+    background-color: rgba(0, 200, 0, .25);
+    color: darkgreen;
+    border: solid 2px darkgreen;
+    padding: 2rem;
+    font-size: 1rem;
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+}
