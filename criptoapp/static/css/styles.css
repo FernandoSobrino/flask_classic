@@ -121,7 +121,7 @@ table.paper .error {
     background-color: rgba(0, 200, 0, .25);
     color: darkgreen;
     border: solid 2px darkgreen;
-    padding: 2rem;
+    padding: 1rem;
     font-size: 1rem;
     margin: 1rem 0;
     display: flex;
