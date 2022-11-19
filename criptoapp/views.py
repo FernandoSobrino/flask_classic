@@ -1,22 +1,33 @@
-from flask import render_template
+from flask import render_template, request
 
 from criptoapp import app
 from .models import CriptoModel
+from .forms import CryptoForm
 
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def home():
-    c = CriptoModel("BTC", "EUR", 3)
-    datos = c.consultar_cambio()
-    moneda_origen = c.moneda_origen
-    cantidad_origen = c.cantidad_from
-    moneda_destino = c.moneda_destino
-    cambio = datos[0]
-    cantidad_destino = datos[1]
-    
 
-    return render_template("inicio.html",
-        camb=cambio, mon_orig=moneda_origen, mon_dest=moneda_destino, c_dest=cantidad_destino, c_origen=cantidad_origen)
+    if request.method == "GET":
+        formulario = CryptoForm()
+        return render_template("inicio.html", form=formulario)
+
+    else:
+        formulario = CryptoForm(data=request.form)
+        moneda1 = formulario.moneda1.data
+        moneda2 = formulario.moneda2.data
+        cantidad = formulario.cantidad.data
+
+        criptomodel = CriptoModel(moneda1, moneda2)
+        cambio = criptomodel.consultar_cambio()
+        cambio = float(round(cambio, 10))
+        cantidad = float(round(cantidad, 10))
+        total = cambio*cantidad
+
+        if formulario.consultarapi.data:
+
+            return render_template("inicio.html", form=formulario, numero=total, calculo=cambio)
+
 
 
 @app.route("/otra")
