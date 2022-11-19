@@ -43,8 +43,10 @@ table.paper td {
     text-align: center;
 }
 
-.titulo_tabla {
+table.paper .table_header {
     border-bottom: rgba(102, 209, 3, 0.886) 1px solid;
+    color:#3e0188;
+    
 }
 
 .numero,
@@ -68,7 +70,7 @@ table.paper .error {
 .pie-de-pagina {
     margin-top: 40px;
     padding: 20px;
-    border-top: solid 3px #180135;
+    border-top: solid 3px #3e0188;
 }
 
 .lista-vacia {
