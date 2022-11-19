@@ -14,11 +14,11 @@ Registro de movimientos
     <tr>
       <th class="table_header">Fecha</th>
       <th class="table_header">Hora</th>
-      <th class="table_header">Moneda Inicial</th>
-      <th class="table_header">Can. Inicial</th>
-      <th class="table_header">Moneda Destino</th>
-      <th class="table_header">Can. Destino</th>
-      <th class="table_header">Precio Unitario</th>
+      <th class="table_header">Origen</th>
+      <th class="table_header">Can. Orig.</th>
+      <th class="table_header">Destino</th>
+      <th class="table_header">Can. Dest.</th>
+      <th class="table_header">Can. UD</th>
     </tr>
     {% if regs %}
       {% for reg in regs %}
@@ -35,7 +35,7 @@ Registro de movimientos
       {% endfor %}
     {% else %}
     <tr>
-        <td class="texto_no_registros" colspan="4">No hay registros que mostrar</td>
+        <td class="registros-vacios" colspan="7">No hay registros que mostrar</td>
     </tr>
     {% endif %}
   </table>
