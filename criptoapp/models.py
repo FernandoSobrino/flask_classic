@@ -1,6 +1,7 @@
 import sqlite3
-from criptoapp.settings import APIKEY
 import requests
+
+from .settings import APIKEY
 
 
 class DBManager:

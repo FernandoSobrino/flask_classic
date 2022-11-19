@@ -2,7 +2,7 @@ from flask import render_template, request, redirect, flash, url_for
 from datetime import date, datetime
 
 from criptoapp import app
-from .settings import DB_PATH
+from . import DB_PATH
 from .models import CriptoModel, DBManager
 from .forms import CryptoForm
 
