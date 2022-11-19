@@ -14,5 +14,5 @@ class CryptoForm(FlaskForm):
     cantidad = IntegerField('Cantidad', validators=[DataRequired(message="Debes indicar una cantidad")])
     consultarapi = SubmitField("Consultar API")
     borrar = SubmitField("Borrar")
-    enviar = SubmitField("Guardar")
+    guardar = SubmitField("Guardar")
     textoapi = StringField()
