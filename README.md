@@ -9,5 +9,7 @@ Proyecto en curso de app cripto usando CoinApi
    ````
    FLASK_APP=run
    FLASK_DEBUG=true
+   FLASK_SECRET_KEY= genere una clave secreta con varios
+   caracteres alfanuméricos
    ````
 3. Ejecuta el comando `flask run` en tu consola para desplegar el servidor y poder ejecutar la app.
