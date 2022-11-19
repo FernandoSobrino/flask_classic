@@ -32,7 +32,7 @@ def home():
             pulsado = True
             return render_template("inicio.html", form=formulario, numero=total, calculo=cambio)
 
-        if formulario.enviar.data:
+        if formulario.guardar.data:
             if pulsado == True:
                 if formulario.validate():
                     formulario = CryptoForm(data=request.form)
