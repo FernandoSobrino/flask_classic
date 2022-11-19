@@ -49,12 +49,13 @@ def home():
                     resultado = db.consultaParametros(consulta,params)
                 
                 if resultado:
-                    flash("Movimiento Actualizado Correctamente",category="exito")
+                    flash("Movimiento Actualizado :)",category="exito")
                     return redirect(url_for("otra"))
 
-@app.route("/otra")
+@app.route("/registros")
 def otra():
     db = DBManager(DB_PATH)
-    resultado  = db.consultaSQL("SELECT * from registros")
-    ultimo_movimiento = resultado.pop()
-    return f"El movimiento {ultimo_movimiento} se ha cargado correctamente"
+    registros = db.consultaSQL("SELECT * from registros")
+    return render_template("registros.html", regs=registros)
+    
+    
