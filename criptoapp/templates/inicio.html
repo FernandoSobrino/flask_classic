@@ -1,58 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "baseu.html" %}
+{% block head_title %}
+{{ super() }}: inicio
+{% endblock %}
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="static/css/flat-remix.css">
-  <link rel="stylesheet" href="static/css/styles.css">
-  <title>Criptocambio</title>
-</head>
+{% block page_title %}
+Realizar una transacción
+{% endblock %}
 
-<body>
-  <header>
-    Criptocambio
-  </header>
-  <nav>
-    Inicio
-  </nav>
+{% block contenido %}
+{{ super() }}
 
-  <main>
-    <h1>Realizar un cambio</h1>
-    <table class="paper">
-      <tr>
-        <th class="titulo_tabla">Moneda origen</th>
-        <th class="titulo_tabla">Cantidad origen</th>
-        <th class="titulo_tabla">Moneda destino</th>
-        <th class="titulo_tabla">Cantidad destino</th>
-        <th class="titulo_tabla">Cambio</th>
-      </tr>
-      <tr>
-        <td>
-          {% if mon_orig== 'BTC' %}
-          Bitcoin
-          {% else %}
-          Euro
-          {% endif %}
-        </td>
-        <td>
-          {{ c_origen }}
-        </td>
-        <td>
-          {% if mon_dest== 'BTC' %}
-          Bitcoin
-          {% else %}
-          Euro
-          {% endif %}
-        </td>
-        <td>{{ c_dest }}</td>
-        <td> {{ camb }} </td>
-      </tr>
-    </table>
-  </main>
 
-  <footer class="pie-de-pagina">2022 Prueba</footer>
-</body>
+<form class="paper" action="/" method="post">
+  {{form.csrf_token}}
 
-</html>
+  {{form.moneda_origen.label}}
+  {{form.moneda_origen}}
+  {{form.moneda_destino.label}}
+  {{form.moneda_destino}}
+
+  <br>
+
+  {{form.cantidad.label}}
+
+  {% if form.cantidad.data %}
+  {{form.cantidad}}
+  {% else %}
+  {{form.cantidad}}
+  {% endif %}
+  {{form.consultarapi}}
+  <br>
+  <p>Precio Unidad: {{calculo}}</p>
+  <p>Precio transacción: {{numero}}</p>
+
+  <br>
+  {{form.borrar}}
+  {{form.enviar}}
+</form>
+{% endblock %}
