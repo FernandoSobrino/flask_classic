@@ -14,14 +14,14 @@ class CriptoModel:
     - Consultar cambio (método)
     """
 
-    def __init__(self,origen,destino,cantidad_from):
+    def __init__(self,origen,destino):
         """
         Construye un objeto con las monedas origen y destino y
         el cambio obtenido desde CoinAPI inicializado a cero
         """
         self.moneda_origen = origen
         self.moneda_destino = destino
-        self.cantidad_from = cantidad_from
+        self.cambio = 0.0
 
     
     def consultar_cambio(self):
@@ -37,8 +37,7 @@ class CriptoModel:
         if respuesta.status_code == 200:
             # guardo el cambio obtenido
             self.cambio = respuesta.json()["rate"]
-            self.cantidad_to = self.cambio*self.cantidad_from
-            return self.cambio,self.cantidad_to
+            return self.cambio
 
         else:
             raise APIError(
