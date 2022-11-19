@@ -7,12 +7,12 @@ class CryptoForm(FlaskForm):
 
     fecha = DateField('Fecha')
     hora = TimeField('Hora')
-    moneda1 = SelectField('De: ', choices=[("EUR","Euro"),("ETH","Ethereum"),("BNB","Binance Coin")
+    moneda_origen = SelectField('De: ', choices=[("EUR","Euro"),("ETH","Ethereum"),("BNB","Binance Coin")
     ,("BTC","Bitcoin")], validators=[DataRequired(message="Selecciona moneda inicial")])
-    moneda2 = SelectField('A: ', choices=[("EUR", "Euro"), ("ETH", "Ethereum"), ("BNB", "Binance Coin"), (
+    moneda_destino = SelectField('A: ', choices=[("EUR", "Euro"), ("ETH", "Ethereum"), ("BNB", "Binance Coin"), (
         "BTC", "Bitcoin")], validators=[DataRequired(message="Selecciona moneda inicial")])
     cantidad = IntegerField('Cantidad', validators=[DataRequired(message="Debes indicar una cantidad")])
     consultarapi = SubmitField("Consultar API")
-    #borrar = SubmitField("Borrar")
-    #enviar = SubmitField("Guardar")
+    borrar = SubmitField("Borrar")
+    enviar = SubmitField("Guardar")
     textoapi = StringField()
