@@ -1,0 +1,42 @@
+{% extends "baseu.html" %}
+{% block head_title %}
+{{ super() }}: registro de movimientos
+{% endblock %}
+
+{% block page_title %}
+Registro de movimientos
+{% endblock %}
+
+{% block contenido %}
+{{ super() }}
+
+  <table class="paper">
+    <tr>
+      <th class="table_header">Fecha</th>
+      <th class="table_header">Hora</th>
+      <th class="table_header">Moneda Inicial</th>
+      <th class="table_header">Can. Inicial</th>
+      <th class="table_header">Moneda Destino</th>
+      <th class="table_header">Can. Destino</th>
+      <th class="table_header">Precio Unitario</th>
+    </tr>
+    {% if regs %}
+      {% for reg in regs %}
+      <tr>
+        <td>{{reg.date}}</td>
+        <td>{{reg.time}}</td>
+        <td>{{reg.moneda_from}}</td>
+        <td>{{reg.cantidad_from}}</td>
+        <td>{{reg.moneda_to}}</td>
+        <td>{{reg.cantidad_to}}</td>
+        <td>{{'%0.5f'|format(reg.cantidad_from / reg.cantidad_to|float)}}</td>
+
+      </tr>
+      {% endfor %}
+    {% else %}
+    <tr>
+        <td class="texto_no_registros" colspan="4">No hay registros que mostrar</td>
+    </tr>
+    {% endif %}
+  </table>
+{% endblock %}
