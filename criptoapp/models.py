@@ -1,5 +1,58 @@
-from criptoapp.key import APIKEY
+import sqlite3
+from criptoapp.settings import APIKEY
 import requests
+
+
+class DBManager:
+    def __init__(self,ruta):
+        self.ruta = ruta
+
+    def consultaSQL(self,consulta):
+        conexion = sqlite3.connect(self.ruta)
+        cursor = conexion.cursor()
+        cursor.execute(consulta)
+
+        self.registros = []
+        nombres_columnas = []
+
+        for desc_columna in cursor.description:
+            nombres_columnas.append(desc_columna[0])
+
+        datos = cursor.fetchall()
+        for dato in datos:
+            registro = {}
+            indice = 0
+            for nombre in nombres_columnas:
+                registro[nombre] = dato[indice]
+                indice += 1
+            self.registros.append(registro)
+        conexion.close()
+
+        return self.registros
+
+    def consultaParametros(self,consulta,params):
+        conexion = sqlite3.connect(self.ruta)
+        cursor = conexion.cursor()
+        resultado = False
+        try:
+            cursor.execute(consulta,params)
+            conexion.commit()
+            resultado = True
+        except Exception as error:
+            print("ERROR EN LA BBDD",error)
+            conexion.rollback()
+        conexion.close()
+        return resultado
+
+    def eliminarRegistros(self):
+        "Método de prueba para eliminar los registros"
+        consulta = "DELETE from cryptobase"
+        conexion = sqlite3.connect(self.ruta)
+        cursor = conexion.cursor()
+        cursor.execute(consulta)
+        conexion.commit()
+        conexion.close()
+
 
 class APIError(Exception):
     # Definición de una clase para "elevar" una excepción a medida para la consulta a la API
