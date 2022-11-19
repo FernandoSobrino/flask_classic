@@ -46,7 +46,7 @@ class DBManager:
 
     def eliminarRegistros(self):
         "Método de prueba para eliminar los registros"
-        consulta = "DELETE from cryptobase"
+        consulta = "DELETE from registros"
         conexion = sqlite3.connect(self.ruta)
         cursor = conexion.cursor()
         cursor.execute(consulta)
