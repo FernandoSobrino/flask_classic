@@ -29,9 +29,11 @@ Realizar una transacción
   {{form.cantidad}}
   {% endif %}
   {{form.consultarapi}}
+  
   <br>
-  <p>Precio Unidad: {{calculo}}</p>
-  <p>Precio transacción: {{numero}}</p>
+  
+  <p>Precio Unidad: {{'%0.10f'|format(calculo|float)}}</p>
+  <p>Precio transacción: {{'%0.10f'|format(numero|float)}}</p>
 
   <br>
   {{form.borrar}}
