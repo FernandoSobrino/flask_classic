@@ -24,7 +24,7 @@ Realizar una transacción
   {{form.cantidad.label}}
 
   {% if form.cantidad.data %}
-  {{form.cantidad}}
+  {{form.cantidad(readonly=True)}}
   {% else %}
   {{form.cantidad}}
   {% endif %}
@@ -32,8 +32,8 @@ Realizar una transacción
   
   <br>
   
-  <p>Precio Unidad: {{'%0.10f'|format(calculo|float)}}</p>
-  <p>Precio transacción: {{'%0.10f'|format(numero|float)}}</p>
+  <p>Precio Unidad: {{calculo}}</p>
+  <p>Precio transacción: {{numero}}</p>
 
   <br>
   {{form.borrar}}
