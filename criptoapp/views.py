@@ -26,11 +26,15 @@ def home():
         cambio = criptomodel.consultar_cambio()
         cambio = float(round(cambio, 10))
         cantidad = float(round(cantidad, 10))
-        total = cambio*cantidad
+        
+        total = cantidad*cambio
+        
+        total = f'{total:.5f}'
+        cambio_repres = f'{cambio:.10f}'
 
         if formulario.consultarapi.data:
             pulsado = True
-            return render_template("inicio.html", form=formulario, numero=total, calculo=cambio)
+            return render_template("inicio.html", form=formulario, total=total, cambio=cambio_repres)
 
         if formulario.guardar.data:
             if pulsado == True:
