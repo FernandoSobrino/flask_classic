@@ -77,6 +77,19 @@ class CriptoModel:
         self.moneda_destino = destino
         self.cambio = 0.0
 
+
+    def consultar_activos(self):
+        "Método en pruebas para listar todos los activos de CoinApi"
+        cabeceras = {"X-CoinAPI-Key": APIKEY}
+
+        url = f"http://rest.coinapi.io/v1/assets"
+        respuesta = requests.get(url, headers=cabeceras)
+
+        if respuesta.status_code == 200:
+            activos = respuesta.json()
+            return activos
+
+
     
     def consultar_cambio(self):
         """
