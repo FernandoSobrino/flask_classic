@@ -29,7 +29,7 @@ def home():
         
         total = cantidad*cambio
         
-        total_formateado = f'{total:.10f}'
+        total_formateado = f'{total:.5f}'
         cambio_formateado = f'{cambio:.10f}'
 
         if formulario.consultarapi.data:
