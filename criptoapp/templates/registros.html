@@ -28,7 +28,7 @@ Registro de movimientos
         <td>{{reg.moneda_from}}</td>
         <td>{{reg.cantidad_from}}</td>
         <td>{{reg.moneda_to}}</td>
-        <td>{{reg.cantidad_to}}</td>
+        <td>{{'%0.5f'|format(reg.cantidad_to|float)}}</td>
         <td>{{'%0.5f'|format(reg.cantidad_from / reg.cantidad_to|float)}}</td>
 
       </tr>

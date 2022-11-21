@@ -29,12 +29,12 @@ def home():
         
         total = cantidad*cambio
         
-        total = f'{total:.5f}'
-        cambio_repres = f'{cambio:.10f}'
+        total_formateado = f'{total:.10f}'
+        cambio_formateado = f'{cambio:.10f}'
 
         if formulario.consultarapi.data:
             pulsado = True
-            return render_template("inicio.html", form=formulario, total=total, cambio=cambio_repres)
+            return render_template("inicio.html", form=formulario, total=total_formateado, cambio=cambio_formateado)
 
         if formulario.guardar.data:
             if pulsado == True:
