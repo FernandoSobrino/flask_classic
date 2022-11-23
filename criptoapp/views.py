@@ -26,9 +26,9 @@ def home():
         cambio = criptomodel.consultar_cambio()
         cambio = float(round(cambio, 10))
         cantidad = float(round(cantidad, 10))
-        
+
         total = cantidad*cambio
-        
+
         total_formateado = f'{total:.5f}'
         cambio_formateado = f'{cambio:.10f}'
 
@@ -49,17 +49,21 @@ def home():
                     fecha = formulario.fecha.data
                     formulario.hora.data = datetime.today().strftime('%H:%M:%S')
                     hora = formulario.hora.data
-                    params = (fecha, hora, moneda_origen, cantidad, moneda_destino, total)
-                    resultado = db.consultaParametros(consulta,params)
-                
+                    params = (fecha, hora, moneda_origen,
+                              cantidad, moneda_destino, total)
+                    resultado = db.consultaParametros(consulta, params)
+
                 if resultado:
-                    flash("Movimiento Actualizado :)",category="exito")
+                    flash("Movimiento Actualizado :)", category="exito")
                     return redirect(url_for("otra"))
+
+        if formulario.borrar.data:
+            pulsado = False
+            return redirect(url_for("home"))
+
 
 @app.route("/registros")
 def otra():
     db = DBManager(DB_PATH)
     registros = db.consultaSQL("SELECT * from registros")
     return render_template("registros.html", regs=registros)
-    
-    
