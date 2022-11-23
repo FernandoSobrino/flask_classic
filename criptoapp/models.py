@@ -5,10 +5,10 @@ from .settings import APIKEY
 
 
 class DBManager:
-    def __init__(self,ruta):
+    def __init__(self, ruta):
         self.ruta = ruta
 
-    def consultaSQL(self,consulta):
+    def consultaSQL(self, consulta):
         conexion = sqlite3.connect(self.ruta)
         cursor = conexion.cursor()
         cursor.execute(consulta)
@@ -31,16 +31,16 @@ class DBManager:
 
         return self.registros
 
-    def consultaParametros(self,consulta,params):
+    def consultaParametros(self, consulta, params):
         conexion = sqlite3.connect(self.ruta)
         cursor = conexion.cursor()
         resultado = False
         try:
-            cursor.execute(consulta,params)
+            cursor.execute(consulta, params)
             conexion.commit()
             resultado = True
         except Exception as error:
-            print("ERROR EN LA BBDD",error)
+            print("ERROR EN LA BBDD", error)
             conexion.rollback()
         conexion.close()
         return resultado
@@ -68,7 +68,7 @@ class CriptoModel:
     - Consultar cambio (método)
     """
 
-    def __init__(self,origen,destino):
+    def __init__(self, origen, destino):
         """
         Construye un objeto con las monedas origen y destino y
         el cambio obtenido desde CoinAPI inicializado a cero
@@ -77,20 +77,6 @@ class CriptoModel:
         self.moneda_destino = destino
         self.cambio = 0.0
 
-
-    def consultar_activos(self):
-        "Método en pruebas para listar todos los activos de CoinApi"
-        cabeceras = {"X-CoinAPI-Key": APIKEY}
-
-        url = f"http://rest.coinapi.io/v1/assets"
-        respuesta = requests.get(url, headers=cabeceras)
-
-        if respuesta.status_code == 200:
-            activos = respuesta.json()
-            return activos
-
-
-    
     def consultar_cambio(self):
         """
         Consulta el cambio entre la moneda origen y la moneda destino
@@ -113,4 +99,5 @@ class CriptoModel:
                 )
             )
 
-        
+
+
