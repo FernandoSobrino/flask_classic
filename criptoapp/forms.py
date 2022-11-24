@@ -15,7 +15,7 @@ class CryptoForm(FlaskForm):
                                  DataRequired(message="Selecciona moneda inicial")])
     cantidad = IntegerField('Cantidad', validators=[
                             DataRequired(message="Debes indicar una cantidad")])
-    consultarapi = SubmitField("Consultar API")
-    borrar = SubmitField("Borrar")
-    guardar = SubmitField("Guardar")
+    consultarapi = SubmitField("Consultar",render_kw={"class":"purple-button"})
+    guardar = SubmitField("Guardar",render_kw={"class":"green-button"})
+    borrar = SubmitField("Borrar",render_kw={"class":"red-button"})
     textoapi = StringField()

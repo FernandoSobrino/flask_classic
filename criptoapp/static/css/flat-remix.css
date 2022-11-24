@@ -55,7 +55,6 @@ input[type="search"]::-webkit-search-results-decoration {
 
 body {
     background-color: #FAFAFA;
-    color: #5c616c;
     margin: 0;
     font-size: 13px;
     cursor: default;
@@ -369,7 +368,8 @@ input[type=submit],
 input[type=reset],
 .blue-button, input.blue-button,
 .red-button, input.red-button,
-.green-button, input.green-button {
+.green-button, input.green-button,
+.purple-button, input.purple-button {
     border-radius: 4px;
     font-weight: bold;
     color: #FFF;
@@ -382,7 +382,7 @@ input[type=reset],
     border: 3px solid #272a34;
     background: #737680;
     line-height: 40px;
-    display: block;
+    display: inline-table;
     transition: border .2s .2s, text-shadow .2s .2s, background .2s .2s, transform .2s, color .2s .2s, box-shadow .2s;
     text-transform: capitalize;
 }
@@ -412,7 +412,8 @@ input[type=submit]:hover,
 input[type=reset]:hover,
 .blue-button:hover, input.blue-button:hover,
 .red-button:hover, input.red-button:hover,
-.green-button:hover, input.green-button:hover {
+.green-button:hover, input.green-button:hover,
+.purple-button:hover,input.purple-button:hover {
     transform: scale(1.03);
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
 }
@@ -423,6 +424,7 @@ input[type=reset]:active, input[type=reset].active,
 .blue-button:active, input.blue-button:active, .blue-button.active, input.blue-button.active,
 .red-button:active, input.red-button:active, .red-button.active, input.red-button.active,
 .green-button:active, input.green-button:active, .green-button.active, input.green-button.active,
+.purple-button:active,input.purple-button:active,.purple-button.active,input.purple-button.active,
 .rounded-button:active, .rounded-button.active {
     box-shadow: none;
     border-color: #000;
@@ -445,9 +447,15 @@ input[type=reset]:active, input[type=reset].active,
 }
 
 .green-button, input.green-button {
-    background: #19a187;
+    background: rgba(82, 168, 2, 0.886);
     border-color: #12715f;
 }
+
+.purple-button, input.purple-button {
+    background: #7834ca;
+    border-color: #3e0188;
+}
+
 
 .paper {
     font-size: 16px;
