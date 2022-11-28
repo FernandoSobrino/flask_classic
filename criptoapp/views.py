@@ -3,7 +3,7 @@ from datetime import date, datetime
 
 from criptoapp import app
 from . import DB_PATH
-from .models import CriptoModel, DBManager
+from .models import CriptoModel, DBManager, CriptoSuma
 from .forms import CryptoForm
 
 
@@ -87,36 +87,15 @@ def status():
     # total monedas_from convertidas a EUROS
     valor_monedas_from = db.consultaTotales(
         "SELECT moneda_from, sum(cantidad_from) FROM registros GROUP BY moneda_from")
-    totales_monedas_from = []
-
-    for valor_from in valor_monedas_from:
-        cripto = CriptoModel(valor_from[0], "EUR")
-        if valor_from[0] == "EUR":
-            continue
-        resultado_cripto_from = cripto.consultar_cambio()
-        resultado_cripto_from = float(resultado_cripto_from)
-        resultado_cripto_from = resultado_cripto_from*valor_from[1]
-        resultado_cripto_from = totales_monedas_from.append(
-            resultado_cripto_from)
-    suma_valor_from = sum(totales_monedas_from)
+    criptosuma_from = CriptoSuma(valor_monedas_from)
 
     # total monedas_to convertidas a EUROS
     valor_monedas_to = db.consultaTotales(
         "SELECT moneda_to, sum(cantidad_to) FROM registros GROUP BY moneda_to")
-    totales_monedas_to = []
+    criptosuma_to = CriptoSuma(valor_monedas_to)
 
-    for valor_to in valor_monedas_to:
-        cripto = CriptoModel(valor_to[0], "EUR")
-        if valor_to[0] == "EUR":
-            continue
-        resultado_cripto_to = cripto.consultar_cambio()
-        resultado_cripto_to = float(resultado_cripto_to)
-        resultado_cripto_to = resultado_cripto_to*valor_to[1]
-        resultado_cripto_to = totales_monedas_to.append(
-            resultado_cripto_to)
-    suma_valor_to = sum(totales_monedas_to)
-
-    atrapada = suma_valor_to - suma_valor_from
-    valor_actual = total_euros_invertidos + saldo_euros_invertidos + atrapada
+    inversion_atrapada = criptosuma_to.sumar_monedas() - criptosuma_from.sumar_monedas()
+    valor_actual = total_euros_invertidos + saldo_euros_invertidos + inversion_atrapada
     valor_actual = round(valor_actual, 8)
-    return render_template("status.html", total_euros_invertidos=total_euros_invertidos, valor_actual=valor_actual)
+    return render_template(
+        "status.html", total_euros_invertidos=total_euros_invertidos, valor_actual=valor_actual)

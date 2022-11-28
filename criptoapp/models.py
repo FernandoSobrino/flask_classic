@@ -118,4 +118,24 @@ class CriptoModel:
             )
 
 
+class CriptoSuma:
+    def __init__(self,consultaSQL):
+        self.consulta = consultaSQL
+
+    def sumar_monedas(self):
+        valor_monedas = self.consulta
+        totales_monedas = []
+        for valor in valor_monedas:
+            cripto = CriptoModel(valor[0], "EUR")
+            if valor[0] == "EUR":
+                continue
+            resultado_cripto_from = cripto.consultar_cambio()
+            resultado_cripto_from = float(resultado_cripto_from)
+            resultado_cripto_from *= valor[1]
+            resultado_cripto_from = totales_monedas.append(
+                resultado_cripto_from)
+        suma_valor = sum(totales_monedas)
+        return suma_valor
+
+
 
