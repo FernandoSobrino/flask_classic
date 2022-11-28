@@ -9,11 +9,11 @@ from .forms import CryptoForm
 
 @app.route("/", methods=["GET", "POST"])
 def home():
-    global pulsado
+    global boton_consulta_pulsado
 
     if request.method == "GET":
         formulario = CryptoForm()
-        pulsado = False
+        boton_consulta_pulsado = False
         return render_template("inicio.html", form=formulario)
 
     else:
@@ -33,11 +33,11 @@ def home():
         cambio_formateado = f'{cambio:.10f}'
 
         if formulario.consultarapi.data:
-            pulsado = True
+            boton_consulta_pulsado = True
             return render_template("inicio.html", form=formulario, total=total_formateado, cambio=cambio_formateado)
 
         if formulario.guardar.data:
-            if pulsado == True:
+            if boton_consulta_pulsado == True:
                 if formulario.validate():
                     formulario = CryptoForm(data=request.form)
                     db = DBManager(DB_PATH)
@@ -55,15 +55,68 @@ def home():
 
                 if resultado:
                     flash("Movimiento Actualizado :)", category="exito")
-                    return redirect(url_for("otra"))
+                    return redirect(url_for("register"))
 
         if formulario.borrar.data:
-            pulsado = False
+            boton_consulta_pulsado = False
             return redirect(url_for("home"))
 
 
-@app.route("/registros")
-def otra():
+@app.route("/register")
+def register():
     db = DBManager(DB_PATH)
     registros = db.consultaSQL("SELECT * from registros")
     return render_template("registros.html", regs=registros)
+
+
+@app.route("/status", methods=["GET"])
+def status():
+    db = DBManager(DB_PATH)
+    euro_to = db.consultaResultado(
+        "SELECT sum(cantidad_to) FROM registros WHERE moneda_to='EUR'")
+    euro_to = euro_to[0]
+
+    euro_from = db.consultaResultado(
+        "SELECT sum(cantidad_from) FROM registros WHERE moneda_from='EUR'")
+    euro_from = euro_from[0]
+
+    saldo_euros_invertidos = euro_to - euro_from
+    saldo_euros_invertidos = round(saldo_euros_invertidos, 8)
+    total_euros_invertidos = euro_from
+
+    # total monedas_from convertidas a EUROS
+    valor_monedas_from = db.consultaTotales(
+        "SELECT moneda_from, sum(cantidad_from) FROM registros GROUP BY moneda_from")
+    totales_monedas_from = []
+
+    for valor_from in valor_monedas_from:
+        cripto = CriptoModel(valor_from[0], "EUR")
+        if valor_from[0] == "EUR":
+            continue
+        resultado_cripto_from = cripto.consultar_cambio()
+        resultado_cripto_from = float(resultado_cripto_from)
+        resultado_cripto_from = resultado_cripto_from*valor_from[1]
+        resultado_cripto_from = totales_monedas_from.append(
+            resultado_cripto_from)
+    suma_valor_from = sum(totales_monedas_from)
+
+    # total monedas_to convertidas a EUROS
+    valor_monedas_to = db.consultaTotales(
+        "SELECT moneda_to, sum(cantidad_to) FROM registros GROUP BY moneda_to")
+    totales_monedas_to = []
+
+    for valor_to in valor_monedas_to:
+        cripto = CriptoModel(valor_to[0], "EUR")
+        if valor_to[0] == "EUR":
+            continue
+        resultado_cripto_to = cripto.consultar_cambio()
+        resultado_cripto_to = float(resultado_cripto_to)
+        resultado_cripto_to = resultado_cripto_to*valor_to[1]
+        resultado_cripto_to = totales_monedas_to.append(
+            resultado_cripto_to)
+    suma_valor_to = sum(totales_monedas_to)
+
+    atrapada = suma_valor_to - suma_valor_from
+    valor_actual = total_euros_invertidos + saldo_euros_invertidos + atrapada
+    valor_actual = round(valor_actual, 8)
+    return render_template("status.html", total_euros_invertidos=total_euros_invertidos, valor_actual=valor_actual)

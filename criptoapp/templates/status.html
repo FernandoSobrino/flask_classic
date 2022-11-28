@@ -1,0 +1,24 @@
+{% extends "baseu.html" %}
+{% block head_title %}
+{{ super() }}: estado de la inversión
+{% endblock %}
+
+{% block page_title %}
+Estado de la Inversión
+{% endblock %}
+
+{% block contenido %}
+{{ super() }}
+
+<form class="paper" action="/purchase" method="GET">
+  <label for="q_to"> Invertido: {{total_euros_invertidos}} </label>
+  <a name="q_to" id="q_to"></a>
+  <br>
+  <label for="pu"> Valor Actual: {{'%0.2f'|format(valor_actual)|float}}</label>
+  <a name="pu" id="pu"></a>
+  <br>
+  <br>
+
+
+</form>
+{% endblock %}

@@ -45,6 +45,24 @@ class DBManager:
         conexion.close()
         return resultado
 
+    def consultaResultado(self, consulta):
+        conexion = sqlite3.connect(self.ruta)
+        cursor = conexion.cursor()
+        cursor.execute(consulta)
+        datos = cursor.fetchone()
+        conexion.commit()
+        conexion.close()
+        return datos
+
+    def consultaTotales(self, consulta):
+        conexion = sqlite3.connect(self.ruta)
+        cursor = conexion.cursor()
+        cursor.execute(consulta)
+        datos = cursor.fetchall()
+        conexion.commit()
+        conexion.close()
+        return datos
+
     def eliminarRegistros(self):
         "Método de prueba para eliminar los registros"
         consulta = "DELETE from registros"
