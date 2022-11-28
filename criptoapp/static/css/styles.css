@@ -1,14 +1,14 @@
 header {
-    background-color: rgba(82, 168, 2, 0.886);
+    background-color: black;
     color: whitesmoke;
     height: 50px;
-    font-size: large;
+    font-size: 1.4rem;
     line-height: 50px;
     padding-left: 25px;
 }
 
 nav {
-    background-color: #3e0188;
+    background-color: #d208be;
     color: white;
     height: 25px;
     font-size: medium;
@@ -31,7 +31,7 @@ h2,
 h3,
 h4,
 h5 {
-    color: #180135;
+    color: black;
 }
 
 table.paper {
@@ -44,8 +44,8 @@ table.paper td {
 }
 
 table.paper .table_header {
-    border-bottom: rgba(102, 209, 3, 0.886) 1px solid;
-    color:#3e0188;
+    border-bottom: #e304b7 2px solid;
+    color: black;
     
 }
 
